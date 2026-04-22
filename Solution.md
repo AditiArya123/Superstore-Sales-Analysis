@@ -9,8 +9,6 @@ This section contains business-focused analysis using SQL along with insights.
 **Question:**  
 How are sales changing over time?
 
-**SQL Query:**  
-Sales show an overall upward trend but with fluctuations, indicating inconsistent demand and possible seasonality.
 ```sql
 SELECT 
     substr("Order Date", -4) || '-' || 
@@ -37,8 +35,75 @@ GROUP BY Discount
 ORDER BY Discount;
 ```
 
+## 3. Loss-Making Products
 
+**Question:**  
+Which products are generating losses?
 
+```sql
+SELECT 
+    product_name, 
+    round(SUM(Sales), 2) AS total_sales,
+    round(SUM(Profit),2) AS total_profit
+FROM Superstore
+GROUP BY product_name
+having total_profit <0
+ORDER BY total_profit asc;
+```
 
+## 4. Category vs Profitability
+**Question:**  
+Which categories are most profitable, not just highest in sales?
 
+```sql
+SELECT 
+    category, 
+    round(SUM(Sales), 2) AS total_sales,
+    round(SUM(Profit),2) AS total_profit
+FROM Superstore
+GROUP BY category
+ORDER BY total_profit desc;
+```
 
+## 5. Regional Profitability
+
+**Question:**  
+Which regions are most profitable?
+
+```sql
+SELECT 
+    region, 
+    round(SUM(Sales), 2) AS total_sales,
+    round(SUM(Profit),2) AS total_profit
+FROM Superstore
+GROUP BY region
+ORDER BY total_profit desc;
+```
+
+## 6.Customer Concentration (Top Customers)
+
+**Question:**  
+How concentrated is revenue among top 10 customers?
+
+```sql
+SELECT 
+    customer_name, 
+    round(SUM(Sales), 2) AS total_spent
+FROM Superstore
+GROUP BY customer_name
+ORDER BY total_spent desc
+limit 10;
+```
+
+## 7. Customer Ranking
+**Question:**  
+How do customers rank based on their spending?
+
+```sql
+SELECT 
+    customer_name, 
+    round(SUM(Sales), 2) AS total_spent,
+    rank() over (ORDER BY SUM(Sales) desc) as rank
+FROM Superstore
+GROUP BY customer_name;
+```
