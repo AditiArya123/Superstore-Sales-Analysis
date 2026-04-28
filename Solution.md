@@ -42,13 +42,13 @@ Which products are generating losses?
 ```sql
 SELECT 
     product_name, 
-    round(SUM(Sales), 2) AS total_sales,
-    ABS(round(SUM(Profit),2)) AS total_loss
+    ROUND(SUM(Sales), 2) AS total_sales,
+    ABS(ROUND(SUM(Profit), 2)) AS total_loss
 FROM Superstore
 GROUP BY product_name
-having total_profit < 0
-ORDER BY total_profit asc
-limit 10;
+HAVING SUM(Profit) < 0
+ORDER BY total_loss DESC
+LIMIT 10;
 ```
 
 ## 4. Category vs Profitability
