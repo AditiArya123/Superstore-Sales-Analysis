@@ -105,5 +105,6 @@ SELECT
     round(SUM(Sales), 2) AS total_spent,
     rank() over (ORDER BY SUM(Sales) desc) as rank
 FROM Superstore
-GROUP BY customer_name;
+GROUP BY customer_name
+Limit 10;
 ```
