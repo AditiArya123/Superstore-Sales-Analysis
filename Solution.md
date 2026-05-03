@@ -80,31 +80,36 @@ GROUP BY region
 ORDER BY total_profit desc;
 ```
 
-## 6.Customer Concentration (Top Customers)
+## 6. Top Customers & Ranking
 
 **Question:**  
-How concentrated is revenue among top 10 customers?
+Who are the highest-value customers and how do they rank based on spending?
 
+**SQL Query:**
 ```sql
 SELECT 
-    customer_name, 
-    round(SUM(Sales), 2) AS total_spent
-FROM Superstore
-GROUP BY customer_name
-ORDER BY total_spent desc
-limit 10;
-```
-
-## 7. Customer Ranking
-**Question:**  
-How do customers rank based on their spending?
-
-```sql
-SELECT 
-    customer_name, 
-    round(SUM(Sales), 2) AS total_spent,
-    rank() over (ORDER BY SUM(Sales) desc) as rank
-FROM Superstore
-GROUP BY customer_name
+    "Customer Name",
+    SUM(Sales) AS total_spent,
+    RANK() OVER (ORDER BY SUM(Sales) DESC) AS rank
+FROM orders
+GROUP BY "Customer Name"
+LIMIT 10;
 Limit 10;
 ```
+
+## 7. Customer Segment Profitability
+
+**Question:**  
+Which customer segments generate the highest sales and profit?
+
+**SQL Query:**
+```sql
+SELECT 
+    Segment,
+    SUM(Sales) AS total_sales,
+    SUM(Profit) AS total_profit
+FROM Superstore
+GROUP BY Segment
+ORDER BY total_profit DESC;
+```
+
