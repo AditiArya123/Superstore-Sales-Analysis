@@ -1,12 +1,27 @@
-# Superstore Sales Analysis
+# 📊 Superstore Sales Analysis
 
-## Project Overview
-This project analyzes retail sales data using SQL and Excel to uncover business insights.
+A business-focused data analysis project using SQL and Excel to identify revenue trends, profitability drivers, customer concentration, and operational opportunities.
 
 ## Tools Used
 - SQL
 - Excel
+- GitHub
 
-## Work in Progress
-- Data uploaded
-- SQL analysis in progress
+## Project Structure
+
+- `data/` → Raw dataset
+- `outputs/` → Excel outputs + charts
+- `images/` → Chart screenshots
+- `solution/` → Full analysis
+
+## Key Insights
+
+- Sales are growing overall but fluctuate monthly
+- Heavy discounts reduce profitability
+- Some products generate recurring losses
+- Top customers contribute significant revenue
+- Regional and category performance varies
+
+## Full Analysis
+
+See `Solution.md`
